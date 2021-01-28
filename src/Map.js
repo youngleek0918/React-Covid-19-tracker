@@ -1,7 +1,7 @@
 import React from 'react'
 import './Map.css'
 import { useMap, MapContainer as LeafletMap,TileLayer } from "react-leaflet";
-// import { showDataOnMap } from "./util";
+import { showDataOnMap } from "./util";
 
 function ChangeMap({ center, zoom }) {
   const map = useMap();
@@ -9,7 +9,7 @@ function ChangeMap({ center, zoom }) {
   return null;
 }
 
-function Map({ center, zoom }) {
+function Map({ countries, casesType, center, zoom }) {
   return (
     <div className="map">
       <LeafletMap center={center} zoom={zoom}>
@@ -20,7 +20,7 @@ function Map({ center, zoom }) {
         ></TileLayer>
 
         {/* loop through countries and draw circles on the screen */}
-        {/* {showDataOnMap(countries, casesType)} */}
+        {showDataOnMap(countries, casesType)}
       </LeafletMap>
     </div>
   );
