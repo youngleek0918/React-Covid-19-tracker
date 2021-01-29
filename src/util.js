@@ -1,6 +1,7 @@
 import React from "react";
 import numeral from "numeral";
 import { Circle, Popup } from "react-leaflet";
+import { circle } from "leaflet";
 
 const casesTypeColors = {
     cases: {
@@ -9,11 +10,11 @@ const casesTypeColors = {
     },
     recovered: {
         hex: "#7dd71d",
-        multiplier: 1200,
+        multiplier: 600,
     },
     deaths: {
         hex: "#fb4443",
-        multiplier: 2000,
+        multiplier: 1000,
     },
 };
 
@@ -27,13 +28,15 @@ export const prettyPrintStat = (stat) =>
     stat ? `+${numeral(stat).format("0.0a")}` : "+0";
 
 // Draw circles on the map with interactive tooltop
-export const showDataOnMap = (data, casesType = 'cases') => (
+export const showDataOnMap = (data, casesType = "cases") => (
     data.map(country => (
         <Circle
             center={[country.countryInfo.lat, country.countryInfo.long]}
-            fillOpacityu={0.4}
-            color={casesTypeColors[casesType].hex}
-            fillColor={casesTypeColors[casesType].hex}
+            fillOpacity={0.4}
+            pathOptions={{ color: casesTypeColors[casesType].hex} }
+            // color={casesTypeColors[casesType].hex}
+            pathOptions={{ color: casesTypeColors[casesType].hex} }
+            // fillColor={casesTypeColors[casesType].hex}
             radius={
                 Math.sqrt(country[casesType]) * casesTypeColors[casesType].multiplier
             }
